@@ -1,0 +1,18 @@
+{
+  "name": "where-is-my-bus",
+  "version": "1.0.0",
+  "description": "bus arrival time display",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "jing-xuan",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "nodemon": "^1.17.1",
+    "request": "^2.83.0"
+  }
+}

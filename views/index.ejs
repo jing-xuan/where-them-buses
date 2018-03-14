@@ -1,0 +1,93 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <title>Where my bus?</title>
+  </head>
+  <style>
+    #canvas{
+      margin: auto;
+      height: 80vh;
+      position: relative;
+    }
+    #title{
+      font-family: 'Shadows Into Light Two';
+      font-size: 50px;
+      margin: 0;
+      padding-left: 20px;
+      padding-top: 15px;
+    }
+    object{
+      position: absolute;
+    }
+    object{
+      position: absolute;
+    }
+    #busstop{
+      height: 200px;
+      left: 50px;
+    }
+    .DD{
+      height: 280px;
+    }
+    .SD{
+      height: 280px;
+    }
+    .BD{
+      height: 280px;
+    }
+  </style>
+  <body>
+    <h1 id = "title">Where my bus?</h1>
+    <div id = "canvas">
+      <object id = "busstop" class = "test" type = "image/svg+xml" data = "busstop.svg">
+        It didn't Work
+      </object>
+    </div>
+  </body>
+  <script>
+    function getTimeDiff(timenow, bustime){
+      var bt = Date.parse(bustime);
+      console.log(bustime - timenow);
+      return (bustime - timenow)/300;
+    }
+
+    $(document).ready(function(){
+      var time = "1520909177000";
+      $("#busstop").css("top", ($("#canvas").height() - $("#busstop").height() -100));
+      var d = new Date();
+      //$("h1").append(d.getTime());
+      <%var arr = ["NextBus", "NextBus2", "NextBus3"]%>;
+      <%var busType = ["SD", "DD", "BD"]%>;
+      <%var busFile = ["busSD.svg", "busDD.svg", "busBD.svg"]%>;
+      <%for(var j = 0; j < data['Services'].length; j++){%>
+        <%for(var i = 0; i < 3; i++){%>
+          if(getTimeDiff(time, Date.parse("<%= data['Services'][j][arr[i]]['EstimatedArrival'] %>")) > 0){
+            var bus = $("<object type = 'image/svg+xml' data = '<%= busFile[busType.indexOf(data['Services'][j][arr[i]]['Type'])]%>' class = '<%= data['Services'][0][arr[i]]['Type'] %> bus'>A bus</object>");
+            bus.css('left', 300 + getTimeDiff(time, Date.parse("<%= data['Services'][j][arr[i]]['EstimatedArrival'] %>")));
+            $("#canvas").append(bus);
+          }
+          <%}%>
+        <%}%>
+          $(".SD, .DD, .BD").css("top", ($("#canvas").height() - $("#busstop").height() -150));
+      });
+      window.onload = function(){
+
+        var svgObj = document.getElementsByClassName('bus');
+        <%for(var i = 0; i < data['Services'].length * 3; i++){%>
+          var busName = svgObj[<%= i %>].contentDocument.getElementsByTagName('text')[0];
+          console.log(busName);
+          <%var x = Math.floor(i/3)%>
+          console.log(<%= x %>);
+          busName.textContent = "<%= data['Services'][x]['ServiceNo'] %>";
+          busName.style.font = 'Open Sans';
+          busName.style['font-size'] = '50px';
+        <%}%>
+      };
+  </script>
+</html>
