@@ -14,9 +14,13 @@ function readContent(callback) {
 }
 
 app.get('/', function(req, res){
+  res.sendFile(__dirname + '\\views\\index.html');
+});
+
+app.get('/:busCode', function(req, res){
   var data;
   var call = {
-    url: apiConfig.url + '=59439',
+    url: apiConfig.apiUrl + req.params.busCode,
     method: 'GET',
     headers: {
       'AccountKey': apiConfig.AccountKey,
@@ -28,7 +32,7 @@ app.get('/', function(req, res){
     var jsonObj = JSON.parse(body);
     var d = new Date();
     console.log(d.getTime());
-    res.render('index.ejs', {data: jsonObj});
+    res.render('bus.ejs', {data: jsonObj});
   });/**
   readContent(function (err, content) {
     //console.log(content);

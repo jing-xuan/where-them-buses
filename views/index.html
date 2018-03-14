@@ -1,0 +1,54 @@
+<!Doctype html>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <title>
+      Where you?
+    </title>
+    <style>
+      body{
+        background-color: grey;
+      }
+      h1{
+        font-family: 'Shadows Into Light Two';
+        font-size: 7em;
+        text-align: center;
+        margin-top: 20vh;
+      }
+      input{
+        display: block;
+        background-color: transparent;
+        font-family: 'Shadows Into Light Two';
+        text-decoration-color: black;
+        text-align: center;
+        font-size: 5em;
+        margin: auto;
+        border: none;
+        border-bottom: white solid;
+      }
+      input:focus{
+        outline: none;
+      }
+      ::placeholder{
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Where you?</h1>
+    <form id = 'busForm'>
+        <input type = 'text' name = 'busCode' id = 'stopCode' required = 'true' placeholder = "Bus Stop Code">
+    </form>
+  </body>
+  <script>
+    $(document).ready(function(){
+      $('#busForm').submit(function(){
+        var code = $('#stopCode').val();
+        $(this).attr('action', "/" + code);
+      });
+    })
+  </script>
+</html>

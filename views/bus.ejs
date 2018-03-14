@@ -58,9 +58,10 @@
     }
 
     $(document).ready(function(){
-      var time = "1520909177000";
+      //var time = "1520909177000";
       $("#busstop").css("top", ($("#canvas").height() - $("#busstop").height() -100));
       var d = new Date();
+      var time = d.getTime();
       //$("h1").append(d.getTime());
       <%var arr = ["NextBus", "NextBus2", "NextBus3"]%>;
       <%var busType = ["SD", "DD", "BD"]%>;
