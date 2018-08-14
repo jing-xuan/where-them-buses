@@ -7,7 +7,7 @@ var app = express();
 app.use(express.static('public'));
 
 function readContent(callback) {
-  fs.readFile("/JX/CS/Where-is-my-bus/data.txt", "utf8", function (err, content) {
+  fs.readFile("/path-to-your-testdata/data.txt", "utf8", function (err, content) {
     if (err) return callback(err)
     callback(null, content)
   })
